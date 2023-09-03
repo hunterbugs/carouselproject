@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Product Carousel with Pagination</title>
+    <style>
+      .our-products-container {
+        width: 100%;
+        margin: 0 auto;
+        overflow: hidden;
+        position: relative;
+
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 32px;
+        @media screen and (min-width: 1200px) {
+          gap: 50px;
+          flex-shrink: 0;
+        }
+      }
+      .our-products-our {
+        color: var(--black-title);
+        text-align: center;
+        font-family: Montserrat;
+        font-size: 24px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: 28px; /* 116.667% */
+        letter-spacing: -0.72px;
+        text-transform: uppercase;
+      }
+
+      .our-products-products {
+        color: #fd9222;
+        font-family: Montserrat;
+        font-size: 24px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: 28px;
+        letter-spacing: -0.72px;
+        text-transform: uppercase;
+      }
+      .our-products-wrapper {
+        display: flex;
+        flex: 0 0 100%;
+        padding: 0;
+        transition: transform 0.5s ease-in-out;
+      }
+
+      .our-products-item {
+        /* flex: 0 0 100%; */
+        width: 335px;
+        height: 365px;
+        margin: auto;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        border-radius: 15px;
+        border: 1px solid rgba(17, 17, 17, 0.1);
+        background: #fff;
+        padding: 20px 32px;
+      }
+      .products-wrapper {
+        flex: 0 0 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .products-title {
+        color: var(--black-title);
+        font-family: Montserrat;
+        font-size: 18px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: 24px; /* 133.333% */
+        letter-spacing: -0.36px;
+        text-transform: uppercase;
+        margin-top: 8px;
+      }
+
+      .products-sub-title {
+        color: rgba(17, 17, 17, 0.7);
+        font-family: Montserrat;
+        font-size: 12px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 14px; /* 116.667% */
+        letter-spacing: -0.24px;
+      }
+
+      .products-button {
+        border-radius: 100px;
+        border: 1px solid rgba(17, 17, 17, 0.1);
+        background: #fafafa;
+        padding: 8px 20px;
+        margin-top: 18px;
+      }
+
+      .products-button-text {
+        color: var(--black-title);
+        font-family: Montserrat;
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: normal;
+      }
+      .pagination {
+        display: flex;
+        justify-content: center;
+
+        margin-top: 20px;
+      }
+
+      .nav-button {
+        display: flex;
+        background-color: transparent;
+        border: none;
+        outline: none;
+        fill: gray;
+        gap: 10px;
+        cursor: pointer;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .nav-button.active {
+        background-color: #ccc;
+        fill: orange;
+      }
+    </style>
+  </head>
+  <body>
+    <section>
+      <div class="our-products-container">
+        <h2 class="our-products-header">
+          <span class="our-products-our">our</span>
+          <span class="our-products-products">products</span>
+        </h2>
+        <ul class="our-products-wrapper">
+          <div class="products-wrapper">
+            <li class="our-products-item list">
+              <img
+                class="products-image"
+                src="./images/orange-1x.png"
+                alt="Orange"
+              />
+              <span class="products-title">orange</span>
+              <span class="products-sub-title">Dark chocolate</span>
+              <button class="products-button">
+                <span class="products-button-text">45 UAH</span>
+              </button>
+            </li>
+          </div>
+          <div class="products-wrapper">
+            <li class="our-products-item list">
+              <img
+                class="products-image"
+                src="./images/apple-cran-1x.png"
+                alt="Apple & Cranberries"
+              />
+              <span class="products-title">apple&cranberry</span>
+              <span class="products-sub-title">Milk chocolate</span>
+              <button class="products-button">
+                <span class="products-button-text">50 UAH</span>
+              </button>
+            </li>
+          </div>
+          <div class="products-wrapper">
+            <li class="our-products-item list">
+              <img
+                class="products-image"
+                src="./images/lime-sea-1x.png"
+                alt="Apple & Cranberries"
+              />
+              <span class="products-title">lime&sea salt</span>
+              <span class="products-sub-title">Dark chocolate</span>
+              <button class="products-button">
+                <span class="products-button-text">66 UAH</span>
+              </button>
+            </li>
+          </div>
+          <div class="products-wrapper">
+            <li class="our-products-item list">
+              <img
+                class="products-image"
+                src="./images/pineapple-1x.png"
+                alt="Apple & Cranberries"
+              />
+              <span class="products-title">pineapple</span>
+              <span class="products-sub-title">Dark chocolate</span>
+              <button class="products-button">
+                <span class="products-button-text">54 UAH</span>
+              </button>
+            </li>
+          </div>
+          <div class="products-wrapper">
+            <li class="our-products-item list">
+              <img
+                class="products-image"
+                src="./images/classic-milk-1x.png"
+                alt="Apple & Cranberries"
+              />
+              <span class="products-title">pineapple</span>
+              <span class="products-sub-title">Dark chocolate</span>
+              <button class="products-button">
+                <span class="products-button-text">54 UAH</span>
+              </button>
+            </li>
+          </div>
+          <div class="products-wrapper">
+            <li class="our-products-item list">
+              <img
+                class="products-image"
+                src="./images/classic-milk-1x.png"
+                alt="Apple & Cranberries"
+              />
+              <span class="products-title">pineapple</span>
+              <span class="products-sub-title">Dark chocolate</span>
+              <button class="products-button">
+                <span class="products-button-text">54 UAH</span>
+              </button>
+            </li>
+          </div>
+          <div class="products-wrapper">
+            <li class="our-products-item list">
+              <img
+                class="products-image"
+                src="./images/classic-milk-1x.png"
+                alt="Apple & Cranberries"
+              />
+              <span class="products-title">pineapple</span>
+              <span class="products-sub-title">Dark chocolate</span>
+              <button class="products-button">
+                <span class="products-button-text">54 UAH</span>
+              </button>
+            </li>
+          </div>
+          <div class="products-wrapper">
+            <li class="our-products-item list">
+              <img
+                class="products-image"
+                src="./images/classic-milk-1x.png"
+                alt="Apple & Cranberries"
+              />
+              <span class="products-title">pineapple</span>
+              <span class="products-sub-title">Dark chocolate</span>
+              <button class="products-button">
+                <span class="products-button-text">54 UAH</span>
+              </button>
+            </li>
+          </div>
+        </ul>
+      </div>
+      <div class="pagination">
+        <button class="nav-button active">
+          <svg width="28" height="13">
+            <use href="./images/our-product.svg#pagination-icon-selected"></use>
+          </svg>
+        </button>
+
+        <button class="nav-button">
+          <svg width="13" height="13">
+            <use href="./images/our-product.svg#pagination-icon"></use>
+          </svg>
+        </button>
+        <button class="nav-button">
+          <svg width="13" height="13">
+            <use href="./images/our-product.svg#pagination-icon"></use>
+          </svg>
+        </button>
+        <button class="nav-button">
+          <svg width="13" height="13">
+            <use href="./images/our-product.svg#pagination-icon"></use>
+          </svg>
+        </button>
+        <button class="nav-button">
+          <svg width="13" height="13">
+            <use href="./images/our-product.svg#pagination-icon"></use>
+          </svg>
+        </button>
+        <button class="nav-button">
+          <svg width="13" height="13">
+            <use href="./images/our-product.svg#pagination-icon"></use>
+          </svg>
+        </button>
+        <button class="nav-button">
+          <svg width="13" height="13">
+            <use href="./images/our-product.svg#pagination-icon"></use>
+          </svg>
+        </button>
+        <button class="nav-button">
+          <svg width="13" height="13">
+            <use href="./images/our-product.svg#pagination-icon"></use>
+          </svg>
+        </button>
+      </div>
+    </section>
+    <script>
+      const carouselWrapper = document.querySelector(".our-products-wrapper");
+      const paginationButtons = document.querySelectorAll(
+        ".pagination .nav-button"
+      );
+
+      paginationButtons.forEach((button, index) => {
+        button.addEventListener("click", () => {
+          carouselWrapper.style.transform = `translateX(-${index * 100}%)`;
+          paginationButtons.forEach((btn) => btn.classList.remove("active"));
+          button.classList.add("active");
+        });
+      });
+    </script>
+  </body>
+</html>

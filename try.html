@@ -1,0 +1,97 @@
+<html>
+  <body>
+    <style>
+      .carousel-container {
+        position: relative;
+        max-width: 400px; /* Adjust as needed */
+        margin: 0 auto;
+      }
+
+      .carousel {
+        display: flex;
+        overflow: hidden;
+      }
+
+      .product {
+        flex: 0 0 100%;
+        padding: 20px;
+        text-align: center;
+        background-color: #f2f2f2;
+        border: 1px solid #ddd;
+        transition: transform 0.5s;
+      }
+
+      .carousel-buttons {
+        text-align: center;
+        margin-top: 10px;
+      }
+
+      .prev-button,
+      .next-button {
+        padding: 10px 20px;
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        cursor: pointer;
+        margin: 0 10px;
+      }
+
+      .prev-button:hover,
+      .next-button:hover {
+        background-color: #0056b3;
+      }
+
+      /* Hide overflowed products */
+      .carousel:not(:hover) .product {
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+      }
+
+      /* Adjust the transition duration for smoother or faster animations */
+    </style>
+    <div class="carousel-container">
+      <div class="carousel">
+        <div class="product">Product 1</div>
+        <div class="product">Product 2</div>
+        <div class="product">Product 3</div>
+        <!-- Add more products as needed -->
+      </div>
+      <div class="carousel-buttons">
+        <button class="prev-button">Previous</button>
+        <button class="next-button">Next</button>
+      </div>
+    </div>
+
+    <script>
+      const carousel = document.querySelector(".carousel");
+      const prevButton = document.querySelector(".prev-button");
+      const nextButton = document.querySelector(".next-button");
+
+      let currentIndex = 0;
+
+      function updateCarousel() {
+        const itemWidth = carousel.querySelector(".product").clientWidth;
+        carousel.style.transform = `translateX(-${currentIndex * itemWidth}px)`;
+      }
+
+      prevButton.addEventListener("click", () => {
+        if (currentIndex > 0) {
+          currentIndex--;
+          updateCarousel();
+        }
+      });
+
+      nextButton.addEventListener("click", () => {
+        const numItems = carousel.querySelectorAll(".product").length;
+        if (currentIndex < numItems - 1) {
+          currentIndex++;
+          updateCarousel();
+        }
+      });
+
+      // Initial update
+      updateCarousel();
+    </script>
+  </body>
+</html>
