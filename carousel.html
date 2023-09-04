@@ -116,20 +116,24 @@
       }
 
       .nav-button {
-        display: flex;
-        background-color: transparent;
+        display: block;
+         background-color: transparent;
         border: none;
-        outline: none;
+        outline: none; 
         fill: gray;
-        gap: 10px;
+        row-gap: 10px;
         cursor: pointer;
         align-items: center;
         justify-content: center;
+        width: 30px;
+        height: 13px;
+        padding: 2px;
       }
 
       .nav-button.active {
-        background-color: #ccc;
+        background-color: transparent;
         fill: orange;
+       
       }
     </style>
   </head>
@@ -257,54 +261,55 @@
       </div>
       <div class="pagination">
         <button class="nav-button active">
-          <svg width="28" height="13">
+          <svg class="nav-icon" width="28" height="13">
             <use href="./images/our-product.svg#pagination-icon-selected"></use>
           </svg>
         </button>
 
         <button class="nav-button">
-          <svg width="13" height="13">
+          <svg class="nav-icon" width="13" height="13">
             <use href="./images/our-product.svg#pagination-icon"></use>
           </svg>
         </button>
         <button class="nav-button">
-          <svg width="13" height="13">
+          <svg class="nav-icon" width="13" height="13">
             <use href="./images/our-product.svg#pagination-icon"></use>
           </svg>
         </button>
         <button class="nav-button">
-          <svg width="13" height="13">
+          <svg class="nav-icon" width="13" height="13">
             <use href="./images/our-product.svg#pagination-icon"></use>
           </svg>
         </button>
         <button class="nav-button">
-          <svg width="13" height="13">
+          <svg class="nav-icon" width="13" height="13">
             <use href="./images/our-product.svg#pagination-icon"></use>
           </svg>
         </button>
         <button class="nav-button">
-          <svg width="13" height="13">
+          <svg class="nav-icon" width="13" height="13">
             <use href="./images/our-product.svg#pagination-icon"></use>
           </svg>
         </button>
         <button class="nav-button">
-          <svg width="13" height="13">
+          <svg class="nav-icon" width="13" height="13">
             <use href="./images/our-product.svg#pagination-icon"></use>
           </svg>
         </button>
         <button class="nav-button">
-          <svg width="13" height="13">
+          <svg class="nav-icon" width="13" height="13">
             <use href="./images/our-product.svg#pagination-icon"></use>
           </svg>
         </button>
       </div>
     </section>
+
     <script>
+
       const carouselWrapper = document.querySelector(".our-products-wrapper");
       const paginationButtons = document.querySelectorAll(
         ".pagination .nav-button"
       );
-
       paginationButtons.forEach((button, index) => {
         button.addEventListener("click", () => {
           carouselWrapper.style.transform = `translateX(-${index * 100}%)`;
@@ -312,6 +317,54 @@
           button.classList.add("active");
         });
       });
+
+      // Get all buttons by class name
+      const buttons = document.querySelectorAll('.pagination .nav-button');
+
+     
+// Define the two SVG icons
+const svgIcon1 = `
+    <svg width="24" height="24" fill="blue">
+      <use href="./images/our-product.svg#pagination-icon"></use>
+    </svg>
+`;
+
+const svgIcon2 = `
+    <svg width="24" height="24" fill="red">
+      <use href="./images/our-product.svg#pagination-icon-selected"></use>
+    </svg>
+`;
+
+// Function to handle button click
+function handleButtonClick(event) {
+    // Get the clicked button
+    const clickedButton = event.currentTarget;
+    const currentIcon = clickedButton.innerHTML;
+
+    // Check if the current icon is svgIcon1
+    if (currentIcon === svgIcon1) {
+        // Toggle to svgIcon2
+        clickedButton.innerHTML = svgIcon2;
+    } else {
+        // Toggle back to svgIcon1
+        clickedButton.innerHTML = svgIcon1;
+    }
+
+    // Reset the SVG icon fill of all inactive buttons
+    buttons.forEach(button => {
+        if (button !== clickedButton) {
+            const icon = button.querySelector('svg');
+            icon.setAttribute('fill', 'blue'); // Change 'blue' to the desired color
+        }
+    });
+}
+
+// Add click event listeners to all buttons
+buttons.forEach(button => {
+    button.addEventListener('click', handleButtonClick);
+});
+
+
     </script>
   </body>
 </html>
